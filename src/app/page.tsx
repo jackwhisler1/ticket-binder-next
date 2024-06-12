@@ -1,3 +1,5 @@
+"use client"; // Add this at the top
+
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -6,16 +8,7 @@ export default function Home() {
   useEffect(() => {
     const fetchSetlist = async () => {
       try {
-        const apiKey = process.env.NEXT_PUBLIC_SETLIST_API_KEY;
-        const url = 'https://api.setlist.fm/rest/1.0/search/artists?artistName=radiohead&p=1&sort=sortName';
-        
-        const headers = {
-          'x-api-key': apiKey,
-          'Accept': 'application/json',
-          'Accept-Language': 'en',
-        };
-
-        const response = await fetch(url, { headers });
+        const response = await fetch('/api/setlist?artistName=radiohead');
         const result = await response.json();
         setSetlist(result);
       } catch (error) {
