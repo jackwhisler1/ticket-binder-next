@@ -2,8 +2,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-  const { artistName, p = 1, sort = 'sortName' } = req.query;
-  const url = `https://api.setlist.fm/rest/1.0/search/artists?artistName=${artistName}&p=${p}&sort=${sort}`;
+  const { userName, p = 1, sort = 'sortName' } = req.query;
+
+  const url = `https://api.setlist.fm/rest/1.0/user/${userName}/attended?p=${p}`;
 
   try {
     const response = await fetch(url, {

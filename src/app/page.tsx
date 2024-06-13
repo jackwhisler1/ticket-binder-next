@@ -1,30 +1,41 @@
-"use client"; // Add this at the top
-
+'use client';
 import { useEffect, useState } from 'react';
-
+import { fetchUser } from '../services/setlistService';
+import TicketStub from '@/pages/components/TicketStub';
+import Concert from '@/types/Concert';
+interface Concert {
+  id: number;
+  name: string;
+  date: string;
+  venue: string;
+  // Add more properties as needed
+}
 export default function Home() {
-  const [setlist, setSetlist] = useState(null);
+  const [concerts, setConcerts] = useState<Concert[]>([]);
+  const userName = 'jwhisler';
 
   useEffect(() => {
-    const fetchSetlist = async () => {
+    const fetchConcertData = async () => {
       try {
-        const response = await fetch('/api/setlist?artistName=radiohead');
-        const result = await response.json();
-        setSetlist(result);
+        const data = await fetchUser(userName);
+        setConcerts(data?.setlist);
       } catch (error) {
         console.error('Error fetching setlist:', error);
       }
     };
 
-    fetchSetlist();
+    fetchConcertData();
   }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-4xl font-bold mb-4">Setlist Sandbox</h1>
-      <div className="w-full max-w-2xl bg-white rounded-lg shadow-md p-6">
-        {setlist ? (
-          <pre className="text-sm text-gray-700">{JSON.stringify(setlist, null, 2)}</pre>
+      <h1 className="text-4xl font-bold mb-4">Ticket Stubs</h1>
+      <div className="w-full max-w-md">
+      {concerts.length > 0 ? (
+          concerts.map(concert => (
+            <TicketStub key={concert.id} concert={concert} />
+          ))
+
         ) : (
           <p className="text-lg text-gray-500">Loading...</p>
         )}
