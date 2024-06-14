@@ -3,13 +3,7 @@ import { useEffect, useState } from 'react';
 import { fetchUser } from '../services/setlistService';
 import TicketStub from '@/pages/components/TicketStub';
 import Concert from '@/types/Concert';
-interface Concert {
-  id: number;
-  name: string;
-  date: string;
-  venue: string;
-  // Add more properties as needed
-}
+
 export default function Home() {
   const [concerts, setConcerts] = useState<Concert[]>([]);
   const userName = 'jwhisler';
