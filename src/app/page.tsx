@@ -6,7 +6,7 @@ import Concert from '@/types/Concert';
 
 export default function Home() {
   const [concerts, setConcerts] = useState<Concert[]>([]);
-  const userName = 'jwhisler';
+  const userName = 'jwhisler'; // sets default user to me
 
   useEffect(() => {
     const fetchConcertData = async () => {
