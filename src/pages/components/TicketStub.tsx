@@ -19,33 +19,31 @@ body {
 `;
   const eventDate = convertDateToUSFormat(concert.eventDate); 
   return (
-    <div className="ticket bg-no-repeat bg-top bg-cover bg-gray-900 w-[700px] h-[250px] rounded-[15px] shadow-md mx-auto mt-10 text-white">
-      <div className="date m-[15px] shadow-md">
-        <span className="day flex flex-col items-start text-[80px]">{new Date(eventDate).getDate()}</span>
-        <span className="month-and-time flex flex-col items-start mt-[15px] font-bold">
+    <div className="ticket bg-no-repeat bg-top bg-cover bg-gray-900 w-full h-48 rounded-2xl shadow-md mx-auto my-4 text-white relative overflow-hidden grid grid-cols-4">
+      <div className="date col-span-1 flex flex-col justify-center items-end shadow-md p-4">
+        <span className="day text-6xl md:text-3xl lg:text-5xl">{new Date(eventDate).getDate()}</span>
+        <span className="month-and-time mb-1 font-bold text-right">
           {new Date(eventDate).toLocaleString('default', { month: 'short' }).toUpperCase()}
           <br />
-          <span className="small text-[16px]">{eventDate}</span>
-        </span>
+        </span>          <span className=" ml-3 small text-xs">{eventDate}</span>
+
       </div>
-      <div className="artist flex flex-row flex-wrap items-center text-[30px] m-[10px_20px_0_20px] font-bold shadow-md">
-        <span className="name">{concert.artist.name}</span>
+      <div className="artist col-span-2 flex flex-col items-center justify-center font-bold shadow-md p-2">
+        <span className="name text-xl md:text-2xl lg:text-2xl">{concert.artist.name}</span>
         <br />
-        <span className="live small text-[16px]">{concert.tour?.name}</span>
+        <span className="live small text-sm md:text-base">{concert.tour?.name}</span>
+        <span className="small text-sm md:text-base">{concert.venue.city.name}</span>
+        <span className="small text-sm md:text-base">{concert.venue.name}</span>
       </div>
-      <div className="location flex flex-col items-start ml-[78px] text-[16px] font-bold shadow-md">
-        <span>{concert.venue.city.name}</span>
-        <br />
-        <span className="small text-[16px]">{concert.venue.name}</span>
-      </div>
-      <div className="rip flex flex-col items-start border-r-2 border-dotted border-gray-400 h-[250px] mr-[120px]"></div>
-      <div className="cta">
-        <button className="buy flex flex-col items-start absolute top-[135px] right-[15px] block text-[12px] font-bold bg-blue-700 px-5 py-2 rounded-[25px] text-white rotate-[-90deg] shadow-md">
+      <div className="rip border-r-2 border-dotted border-gray-400 h-full absolute top-0 left-3/4 transform -translate-x-1/2"></div>
+      <div className="cta absolute top-1/2 right-4 transform -translate-y-1/2">
+        <button className="buy text-xs md:text-sm lg:text-base font-bold bg-blue-700 px-4 py-2 rounded-full text-white rotate-90 shadow-md">
           GRAB A TICKET
         </button>
       </div>
     </div>
   );
+
 }
 
 export default TicketStub;

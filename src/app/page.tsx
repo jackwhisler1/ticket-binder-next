@@ -24,14 +24,13 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <h1 className="text-4xl font-bold mb-4">Ticket Stubs</h1>
-      <div className="w-full max-w-md">
-      {concerts.length > 0 ? (
-          concerts.map(concert => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-4xl">
+        {concerts.length > 0 ? (
+          concerts.slice(0, 8).map(concert => (
             <TicketStub key={concert.id} concert={concert} />
           ))
-
         ) : (
-          <p className="text-lg text-gray-500">Loading...</p>
+          <p className="text-lg text-gray-500 col-span-2 text-center">Loading...</p>
         )}
       </div>
     </div>
